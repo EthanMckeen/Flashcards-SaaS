@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Box, Container, AppBar, Toolbar, Typography } from "@mui/material";
+import { Box, Container, AppBar, Toolbar, Typography,Button } from "@mui/material";
 import Head from "next/head";
-import { SignedIn, SignIn, UserButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
@@ -18,9 +18,9 @@ export default function Home() {
             <Button>Login</Button>
             <Button>Sign up</Button>
           </SignedOut>
-          <SingedIn>
+          <SignedIn>
             <UserButton/>
-          </SingedIn>
+          </SignedIn>
         </Toolbar>
       </AppBar>
     </Container>
