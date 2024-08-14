@@ -11,7 +11,9 @@ export default function Home() {
         <meta name= "description" content="Create flashcards from your notes" />
       </Head>
 
-
+    {
+      //TOP BAR
+    }
       <AppBar position = 'static'>
         <Toolbar>
           <Typography variant="h6" style={{flexGrow: 1}}>LOGO FlashNotes</Typography>
@@ -27,8 +29,14 @@ export default function Home() {
 
 
 
-      
+      {
+      //Holds all none bar stuff if you dont know container type has auto margins
+      }
       <Container> 
+
+        {
+        //TITLE CARD
+        }
         <Box  
           sx={{
             textAlign: 'center',
@@ -41,7 +49,9 @@ export default function Home() {
           <Button variant="contained" sx={{mt: 2}}>Get Started</Button>
         </Box>
         
-
+        {
+        //Features and Feature's children
+        }
         <Box sx={{my: 6, mb: 2}}> 
           <Typography variant="h4" component="h2" mb={2}>
             Features
@@ -107,10 +117,16 @@ export default function Home() {
           </Grid>
         </Box>
 
-
+        {
+        //Pricing and Pricing's children
+        }
         <Box sx={{my: 6, mb: 2}}>
           <Typography variant="h4" component="h2" mb={2}>Pricing</Typography>
           <Grid container spacing={4}>
+
+            {
+              //FREE TIER
+            }
             <Grid item xs={12} md={4}>
               <Box sx={{
                   p: 3,
@@ -147,6 +163,9 @@ export default function Home() {
                 </Box>
               </Grid>
 
+            {
+              //BASIC TIER
+            }
             <Grid item xs={12} md={4}>
               <Box sx={{
                   p: 3,
@@ -183,6 +202,9 @@ export default function Home() {
                 </Box>
               </Grid>
 
+            {
+              //PRO TIER
+            }
             <Grid item xs={12} md={4}>
               <Box sx={{
                   p: 3,
