@@ -1,9 +1,43 @@
+'use client'
 import Image from "next/image";
 import { Box, Container, AppBar, Toolbar, Typography,Button, Grid } from "@mui/material";
 import Head from "next/head";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import getStripe from "@/utils/get-stripe";
 
 export default function Home() {
+
+  const handleSubmit = async () =>{
+    const checkoutSession = await fetch('/api/checkout_session', {
+      method: 'POST',
+      headers: {
+        origin: 'https://localhost:3000'
+      }
+    })
+
+    const checkoutSessionJson = await checkoutSession.json()
+
+    if (checkoutSession.statusCode === 500){
+      console.error(checkoutSession.message)
+      return
+    }
+
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id,
+    })
+
+    if(error){
+      console.warn(error.message)
+    }
+      
+  }
+
+
+
+
+
+
   return (
     <Box height= '100vh' bgcolor='#EFEFEF'>
       <Head>
@@ -237,7 +271,7 @@ export default function Home() {
                     </Typography>
                   </Box>
 
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1}}>Upgrade to Pro</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1}} onClick={handleSubmit}>Upgrade to Pro</Button>
                 </Box>
               </Grid>
 
