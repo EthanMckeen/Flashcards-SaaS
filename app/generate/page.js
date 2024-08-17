@@ -44,47 +44,44 @@ export default function Generate(){
         setOpen(false)
     }
 
-    const saveFlashcards = async () =>{
-        if(!isSignedIn){
-            alert('You must be logged in to save flashcards.')
-            return
+    const saveFlashcards = async () => {
+        if (!name) {
+            alert('Please enter a name');
+            return;
         }
-
-        if (!name){
-            alert('Please enter a name')
-            return
-        }
-
-        const batch = writeBatch(db)
-        const userDocRef = doc(collection(db, 'users'), user.id)
-        const docSnap = await getDoc(userDocRef)
-
-        if(docSnap.exists()){
-            const collections = docSnap.data().flashcards || []
-            if(collections.find((f)=> f.name === name)){
-                alert("Flashcard collection with the same name already exists.")
-                return
+    
+        const batch = writeBatch(db);
+        const userDocRef = doc(collection(db, 'users'), user.id);
+        const docSnap = await getDoc(userDocRef);
+    
+        let collections = [];
+    
+        if (docSnap.exists()) {
+            collections = docSnap.data().flashcards || [];
+            if (collections.find((f) => f.name === name)) {
+                alert("Flashcard collection with the same name already exists.");
+                return;
             }
-            else{
-                collections.push({name})
-                batch.set(userDocRef, {flashcards: collection}, {merge: true})
-            }
-        }   
-        else{
-
-            batch.set(userDocRef, {flashcards: [{name}]})
         }
-
-        const colRef = collection(userDocRef, name)
+    
+        // Add the new collection name
+        collections.push({ name });
+    
+        // Save the updated flashcards collection without functions
+        batch.set(userDocRef, { flashcards: collections }, { merge: true });
+    
+        const colRef = collection(userDocRef, name);
+    
+        // Save each flashcard separately
         flashcards.forEach((flashcard) => {
-            const cardDocRef = doc(colRef)
-            batch.set(cardDocRef, flashcard)
-        })
-
-        await batch.commit()
-        handleClose()
-        router.push('/flashcards')
-    }
+            const cardDocRef = doc(colRef);
+            batch.set(cardDocRef, { ...flashcard }); // Ensure flashcard data is plain and does not include functions
+        });
+    
+        await batch.commit();
+        handleClose();
+        router.push('/flashcards');
+    };
 
     return(
         <Box>
