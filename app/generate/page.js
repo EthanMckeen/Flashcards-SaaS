@@ -1,12 +1,13 @@
 'use client'
 
-import { Box, Button, CardActionArea, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography, Card, Container } from "@mui/material"
+import { Box, Button, CardActionArea, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography, Card, Container, AppBar, Toolbar } from "@mui/material"
 import { useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import { db } from "@/firebase"
 import { doc, collection, getDoc, setDoc} from "firebase/firestore"
 import { writeBatch } from "firebase/firestore"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 
 
 export default function Generate(){
@@ -29,6 +30,10 @@ export default function Generate(){
             .then((data) => setFlashcards(data))
     }
 
+    const handleLogoClick = () => {
+        router.push('/');
+      };
+      
     const handleCardClick=(id) =>{
         setFlipped((prev) => ({
             ...prev,
@@ -85,6 +90,23 @@ export default function Generate(){
 
     return(
         <Box>
+            <AppBar position='static'>
+                <Toolbar>
+                    <Typography variant="h6" style={{flexGrow: 1, cursor: 'pointer'}} onClick={handleLogoClick}>LOGO FlashNotes</Typography>
+                    <SignedOut>
+                        <Button color='inherit' href="/sign-in">Login</Button>
+                        <Button color='inherit' href="/sign-up">Sign up</Button>
+                    </SignedOut>
+                    <SignedIn>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Button color="inherit" href="/flashcards" sx={{mr: 5}}>
+                                View my Sets
+                            </Button>
+                            <UserButton sx={{ ml: 2 }} />
+                        </Box>
+                    </SignedIn>
+                </Toolbar>
+            </AppBar>
             <Box sx={{
                 mt:4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'
             }}>

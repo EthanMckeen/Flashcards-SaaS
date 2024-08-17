@@ -2,10 +2,18 @@
 import Image from "next/image";
 import { Box, Container, AppBar, Toolbar, Typography,Button, Grid } from "@mui/material";
 import Head from "next/head";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import getStripe from "@/utils/get-stripe";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  
+  const router = useRouter();
+  const {isSignedIn} = useUser()
+
+  const handleLogoClick = () => {
+    router.push('/');
+  };
 
   const handleSubmit = async () =>{
     const checkoutSession = await fetch('/api/checkout_session', {
@@ -34,6 +42,15 @@ export default function Home() {
   }
 
 
+  const handleGetStarted =() =>{
+    if(isSignedIn){
+      router.push("/generate");
+    } else {
+      router.push("/sign-in");
+    }
+     
+  }
+
 
 
 
@@ -50,13 +67,21 @@ export default function Home() {
     }
       <AppBar position = 'static'>
         <Toolbar>
-          <Typography variant="h6" style={{flexGrow: 1}}>LOGO FlashNotes</Typography>
+          <Typography variant="h6" style={{flexGrow: 1, cursor: 'pointer'}} onClick={handleLogoClick}>LOGO FlashNotes</Typography>
           <SignedOut>
-            <Button color='inherit' href="/sign-in">Login</Button>
-            <Button color='inherit'href="/sign-up">Sign up</Button>
+            <Button  href="/sign-in" sx={{mx:2, color: '#fff', '&:hover': { bgcolor: '#fff', color: '#4e5340'}}}>Login</Button>
+            <Button chref="/sign-up" sx={{mx:2, color: '#fff', '&:hover': { bgcolor: '#fff', color: '#4e5340'}}}>Sign up</Button>
           </SignedOut>
           <SignedIn>
-            <UserButton/>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Button color="inherit" href="/generate" sx={{mr: 5}}>
+                  Create New Sets
+                </Button>
+                <Button color="inherit" href="/flashcards" sx={{mr: 5}}>
+                  view my sets
+                </Button>
+                <UserButton sx={{ ml: 2 }} />
+            </Box>
           </SignedIn>
         </Toolbar>
       </AppBar>
@@ -80,7 +105,7 @@ export default function Home() {
           
           <Typography variant="h2">Welcome to FlashNotes</Typography>
           <Typography variant="h5">Get to studying in a Flash!!!</Typography>
-          <Button variant="contained" sx={{mt: 2}}>Get Started</Button>
+          <Button variant="contained" sx={{mt: 2, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleGetStarted}>Get Started</Button>
         </Box>
         
         {
@@ -193,7 +218,7 @@ export default function Home() {
                     </Typography>
                   </Box>
                   
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1}}>Start Free</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleGetStarted}>Start Free</Button>
                 </Box>
               </Grid>
 
@@ -232,7 +257,7 @@ export default function Home() {
                     </Typography>
                   </Box>
                   
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1}}>Unlock Basic</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleSubmit}>Unlock Basic</Button>
                 </Box>
               </Grid>
 
@@ -271,7 +296,7 @@ export default function Home() {
                     </Typography>
                   </Box>
 
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1}} onClick={handleSubmit}>Upgrade to Pro</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleSubmit}>Upgrade to Pro</Button>
                 </Box>
               </Grid>
 

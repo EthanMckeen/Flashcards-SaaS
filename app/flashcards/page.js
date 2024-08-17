@@ -13,6 +13,11 @@ export default function Flashcard(){
     const [flashcards, setFlashcards] = useState([])
     const router = useRouter()
     
+
+    const handleLogoClick = () => {
+        router.push('/');
+      };
+
     useEffect(()=>{
         async function getFlashcards(){
             if(!user) return
@@ -42,7 +47,7 @@ export default function Flashcard(){
         <Box>
             <AppBar position = 'static'>
                 <Toolbar>
-                    <Typography variant="h6" style={{flexGrow: 1}}>LOGO FlashNotes</Typography>
+                    <Typography variant="h6" style={{flexGrow: 1, cursor: 'pointer'}} onClick={handleLogoClick}>LOGO FlashNotes</Typography>
                     <SignedOut>
                         <Button color='inherit' href="/sign-in">Login</Button>
                         <Button color='inherit'href="/sign-up">Sign up</Button>
@@ -51,9 +56,6 @@ export default function Flashcard(){
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Button color="inherit" href="/generate" sx={{ mr: 5 }}>
                                 Create New Sets
-                            </Button>
-                            <Button color="inherit" href="/flashcards" sx={{ mr: 5 }}>
-                                View My Sets
                             </Button>
                             <UserButton sx={{ ml: 2 }} />
                         </Box>

@@ -3,3 +3,18 @@
   padding: 0;
   margin: 0;
 }
+
+.MuiAppBar-root {
+  background-color: #4e5340 !important; /* Set your desired color here */
+  color: white !important; /* Optional: Set text color if needed */
+}
+
+.MuiTypography-h6 {
+  font-weight: 700 !important; /* Make font bold */
+  font-family: 'Arial', sans-serif !important; /* Set font family */
+}
+
+.MuiButton-root {
+  font-weight: bold !important; /* Make button text bold */
+  font-family: 'Arial', sans-serif !important; /* Set button font family */
+}
