@@ -5,7 +5,8 @@ import { use, useEffect, useState,  } from "react"
 import { collection, doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useRouter } from "next/navigation"
-import { CardActionArea, Card, Grid, Box, CardContent, Typography, Container } from "@mui/material"
+import { CardActionArea, Card, Grid, Box, CardContent, Typography, Container, AppBar, Toolbar, Button } from "@mui/material"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Flashcard(){
     const {isLoaded, isSignedIn, user} = useUser()
@@ -38,20 +39,57 @@ export default function Flashcard(){
     }
 
     return(
-        <Container maxwidth = "100vw">
-            <Grid container spacing = {3} sx={{mt:4}}>
-                {flashcards.map((flashcard, index)=>(
-                    <Grid items xs={12} sm={6} md={4} key={index}>
-                        <Card>
-                            <CardActionArea onClick={()=>{handleCardClick(flashcard.name)}}>
-                                <CardContent>
-                                    <Typography variant="h6">{flashcard.name} </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
+        <Box>
+            <AppBar position = 'static'>
+                <Toolbar>
+                    <Typography variant="h6" style={{flexGrow: 1}}>LOGO FlashNotes</Typography>
+                    <SignedOut>
+                        <Button color='inherit' href="/sign-in">Login</Button>
+                        <Button color='inherit'href="/sign-up">Sign up</Button>
+                    </SignedOut>
+                    <SignedIn>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Button color="inherit" href="/generate" sx={{ mr: 5 }}>
+                                Create New Sets
+                            </Button>
+                            <Button color="inherit" href="/flashcards" sx={{ mr: 5 }}>
+                                View My Sets
+                            </Button>
+                            <UserButton sx={{ ml: 2 }} />
+                        </Box>
+                    </SignedIn>
+                </Toolbar>
+            </AppBar>
+            <Container maxwidth = "100vw">
+            {flashcards.length === 0 ? (
+                    <Box
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{ textAlign: 'center', mt: 4 }}
+                    >
+                        <Typography variant="h5">Looks like you don't have any sets.</Typography>
+                        <Button variant="contained" sx={{ mt: 2 }} href="/generate">
+                            Click here to make your first set
+                        </Button>
+                    </Box>
+                ) : (
+                    <Grid container spacing={3} sx={{ mt: 4 }}>
+                        {flashcards.map((flashcard, index) => (
+                            <Grid item xs={12} sm={6} md={4} key={index}>
+                                <Card>
+                                    <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
+                                        <CardContent>
+                                            <Typography variant="h6">{flashcard.name}</Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
-            </Grid>
-        </Container>
+                )}
+            </Container>
+        </Box>
     )
 }
