@@ -189,10 +189,16 @@ export default function Flashcard(){
                                                 padding: 2,
                                                 boxSizing: 'border-box',
                                             },
+                                            '& > div > div:nth-of-type(1)': {
+                                                backgroundColor: 'tan',  // Front side color
+                                                color: 'white',  // Optional text color for the front side
+                                            },
                                             '& > div > div:nth-of-type(2)': {
+                                                backgroundColor: 'white',  // Back side color
+                                                color: 'black',  // Optional text color for the back side
                                                 transform: 'rotateY(180deg)',
                                             },
-                                        }}>
+                                            }}>
                                             <div>
                                                 <div>
                                                     <Typography variant="h5" component="div">

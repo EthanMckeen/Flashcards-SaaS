@@ -91,7 +91,7 @@ export default function Home() {
       {
       //Holds all none bar stuff if you dont know container type has auto margins
       }
-      <Container> 
+      <Container maxWidth={false} sx={{ pb: 8, bgcolor: "#EFEFEF" }}> 
 
         {
         //TITLE CARD
@@ -105,7 +105,9 @@ export default function Home() {
           
           <Typography variant="h2">Welcome to FlashNotes</Typography>
           <Typography variant="h5">Get to studying in a Flash!!!</Typography>
-          <Button variant="contained" sx={{mt: 2, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleGetStarted}>Get Started</Button>
+          <Button variant="contained" sx={{mt: 2, bgcolor: '#606c38', '&:hover':{bgcolor: '#283618' }}} onClick={handleGetStarted}>
+            Get Started
+          </Button>
         </Box>
         
         {
@@ -126,12 +128,16 @@ export default function Home() {
                borderRadius: '13px',
                display: 'flex',
                flexDirection: 'column',
-               height: '100%' // Ensure all boxes grow to the same height
+               height: '100%', // Ensure all boxes grow to the same height
+               transition: 'transform 0.3s ease-in-out', // Smooth transition for scaling
+              '&:hover': {
+                transform: 'scale(1.05)' // Slightly enlarge the box on hover
+              }
             }}>
-                <Typography variant="h6">Easy text input</Typography>
+                <Typography variant="h6">Easy Text Input</Typography>
                 <Typography>
                   {' '}
-                  Simply input your text and let us do the rest. Creating cards in a Flash.
+                  Simply input your text and let us do the rest, creating cards in a Flash.
                 </Typography>
               </Box>
             </Grid>
@@ -145,9 +151,13 @@ export default function Home() {
                borderRadius: '13px',
                display: 'flex',
                flexDirection: 'column',
-               height: '100%' // Ensure all boxes grow to the same height
+               height: '100%', // Ensure all boxes grow to the same height
+               transition: 'transform 0.3s ease-in-out', // Smooth transition for scaling
+              '&:hover': {
+                transform: 'scale(1.05)' // Slightly enlarge the box on hover
+              }
             }}>
-                <Typography variant="h6">Portable and Acessible</Typography>
+                <Typography variant="h6">Portable and Accessible</Typography>
                 <Typography>
                   {' '}
                   Access anywhere on any device and study on the go.
@@ -164,12 +174,16 @@ export default function Home() {
                borderRadius: '13px',
                display: 'flex',
                flexDirection: 'column',
-               height: '100%' // Ensure all boxes grow to the same height
+               height: '100%', // Ensure all boxes grow to the same height
+               transition: 'transform 0.3s ease-in-out', // Smooth transition for scaling
+              '&:hover': {
+                transform: 'scale(1.05)' // Slightly enlarge the box on hover
+              }
             }}>
-                <Typography variant="h6">Share with friends</Typography>
+                <Typography variant="h6">Share With Friends</Typography>
                 <Typography>
                   {' '}
-                  Easily share your Study decks with Peers.
+                  Easily share your study decks with peers.
                 </Typography>
               </Box>
             </Grid>
@@ -201,24 +215,26 @@ export default function Home() {
                   <Typography variant="h6" my={1}>Free</Typography>
                   <Typography  my={1}>
                     {' '}
-                    Get access to these feature with a free account for no cost
+                    Get access to these features 
+                    {' '}
+                    <span style={{ fontWeight: 'bold' }}> FREE</span> of charge!
                   </Typography>
                   <Box ml={5} p={1}>
                     <Typography my={1}>
                       {' '}
-                      feature 1 yes
+                      - Generate flashcards to help you study
                     </Typography>
-                    <Typography my={1}>
+                    <Typography my={1} sx={{ textDecoration: 'line-through' }}>
                       {' '}
-                      feature 2 no
+                      - Test your knowledge with quizzes
                     </Typography>
-                    <Typography my={1}>
+                    <Typography my={1} sx={{ textDecoration: 'line-through' }}>
                       {' '}
-                      feature 3 no
+                      - Share your flashcard sets with friends
                     </Typography>
                   </Box>
                   
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleGetStarted}>Start Free</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#606c38', '&:hover':{bgcolor: '#283618' }}} onClick={handleGetStarted}>Start Free</Button>
                 </Box>
               </Grid>
 
@@ -235,29 +251,31 @@ export default function Home() {
                   borderRadius: '13px',
                   display: 'flex',
                   flexDirection: 'column',
-                  height: '100%' // Ensure all boxes grow to the same height
+                  height: '100%', // Ensure all boxes grow to the same height
                 }}>
                   <Typography variant="h6" my={1}>Basic</Typography>
                   <Typography  my={1}>
                     {' '}
-                    Get access to these feature with a Basic account for $1
+                    Get access to these features with a Basic account for
+                    {' '}
+                    <span style={{ fontWeight: 'bold' }}>$1</span>!
                   </Typography>
                   <Box ml={5} p={1}>
                     <Typography my={1}>
                       {' '}
-                      feature 1 yes
+                      - Generate flashcards to help you study
                     </Typography>
                     <Typography my={1}>
                       {' '}
-                      feature 2 yes
+                      - Test your knowledge with quizzes
                     </Typography>
-                    <Typography my={1}>
+                    <Typography my={1} sx={{ textDecoration: 'line-through' }}>
                       {' '}
-                      feature 3 no
+                      - Share your flashcard sets with friends
                     </Typography>
                   </Box>
                   
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleSubmit}>Unlock Basic</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#283618', '&:hover':{bgcolor: '#132a13' }}} onClick={handleSubmit}>Unlock Basic</Button>
                 </Box>
               </Grid>
 
@@ -279,32 +297,31 @@ export default function Home() {
                   <Typography variant="h6" my={1}>Pro</Typography>
                   <Typography  my={1}>
                     {' '}
-                    Get access to these feature with a Pro account for $3
+                    Get access to these features with a Pro account for
+                    {' '}
+                    <span style={{ fontWeight: 'bold' }}>$3</span>!
                   </Typography>
                   <Box ml={5} p={1}>
-                    <Typography my={1}>
+                  <Typography my={1}>
                       {' '}
-                      feature 1 yes
+                      - Generate flashcards to help you study
                     </Typography>
                     <Typography my={1}>
                       {' '}
-                      feature 2 yes
+                      - Test your knowledge with quizzes
                     </Typography>
                     <Typography my={1}>
                       {' '}
-                      feature 3 yes
+                      - Share your flashcard sets with friends
                     </Typography>
                   </Box>
 
-                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#748cab', '&:hover':{bgcolor: '#77b6ea' }}} onClick={handleSubmit}>Upgrade to Pro</Button>
+                  <Button variant="contained" sx={{ width: '70%', alignSelf: 'center', mt: 1, bgcolor: '#283618', '&:hover':{bgcolor: '#132a13' }}} onClick={handleSubmit}>Upgrade to Pro</Button>
                 </Box>
               </Grid>
 
           </Grid>
         </Box>
-
-
-
       </Container>
     </Box>
 

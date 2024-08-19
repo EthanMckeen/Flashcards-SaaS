@@ -121,8 +121,17 @@ export default function Generate(){
                         sx={{
                             mb: 2
                         }}/>
-                        <Button variant="contained" color="primary" onClick={handleSubmit} fullWidth>
-                            {' '}
+                        <Button
+                            variant="contained"
+                            onClick={handleSubmit}
+                            fullWidth
+                            sx={{
+                                backgroundColor: '#606C38', //light green
+                                '&:hover': {
+                                backgroundColor: '#283618', // Darker shade for hover state
+                                },
+                            }}
+                            >
                             Submit
                         </Button>
                 </Paper>
@@ -140,46 +149,51 @@ export default function Generate(){
                                     }}>
                                         <CardContent>
                                         <Box sx={{
-                                                    perspective: '1000px',
-                                                    '& > div': {
-                                                        transition: 'transform 0.6s',
-                                                        transformStyle: 'preserve-3d',
-                                                        position: 'relative',
-                                                        width: '100%',
-                                                        height: '200px',
-                                                        boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
-                                                        transform: flipped[index]
-                                                            ? 'rotateY(180deg)'
-                                                            : 'rotateY(0deg)',
-                                                    },
-                                                    '& > div > div': {
-                                                        position: 'absolute',
-                                                        width: '100%',
-                                                        height: '100%',
-                                                        backfaceVisibility: 'hidden',
-                                                        display: 'flex',
-                                                        justifyContent: 'center',
-                                                        alignItems: 'center',
-                                                        padding: 2,
-                                                        boxSizing: 'border-box',
-                                                    },
-                                                    '& > div > div:nth-of-type(2)': {
-                                                        transform: 'rotateY(180deg)',
-                                                    },
-                                                }}>
-                                                    <div>
-                                                        <div>
-                                                            <Typography variant="h5" component="div">
-                                                                {flashcard.front}
-                                                            </Typography>
-                                                        </div>
-                                                        <div>
-                                                            <Typography variant="h5" component="div">
-                                                                {flashcard.back}
-                                                            </Typography>
-                                                        </div>
-                                                    </div>
-                                                </Box>
+                                            perspective: '1000px',
+                                            '& > div': {
+                                                transition: 'transform 0.6s',
+                                                transformStyle: 'preserve-3d',
+                                                position: 'relative',
+                                                width: '100%',
+                                                height: '200px',
+                                                boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
+                                                transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                                            },
+                                            '& > div > div': {
+                                                position: 'absolute',
+                                                width: '100%',
+                                                height: '100%',
+                                                backfaceVisibility: 'hidden',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                padding: 2,
+                                                boxSizing: 'border-box',
+                                            },
+                                            '& > div > div:nth-of-type(1)': {
+                                                backgroundColor: 'tan',  // Front side color
+                                                color: 'white',  // Optional text color for the front side
+                                            },
+                                            '& > div > div:nth-of-type(2)': {
+                                                backgroundColor: 'white',  // Back side color
+                                                color: 'black',  // Optional text color for the back side
+                                                transform: 'rotateY(180deg)',
+                                            },
+                                        }}>
+                                            <div>
+                                                <div>
+                                                    <Typography variant="h5" component="div">
+                                                        {flashcard.front}
+                                                    </Typography>
+                                                </div>
+                                                <div>
+                                                    <Typography variant="h5" component="div">
+                                                        {flashcard.back}
+                                                    </Typography>
+                                                </div>
+                                            </div>
+                                        </Box>
+
                                         </CardContent>
                                     </CardActionArea>
                                 </Card>
@@ -191,7 +205,17 @@ export default function Generate(){
 
                 
                 <Box sx={{mt:4, display: 'flex', justifyContent: 'center'}}>
-                    <Button variant="contained" color='secondary' onClick={handleOpen}>
+                    <Button
+                        variant="contained"
+                        onClick={handleOpen}
+                        sx={{
+                            backgroundColor: '#606C38', // Custom color (red)
+                            '&:hover': {
+                            backgroundColor: '#283618', // Darker shade for hover state
+                            },
+                            mb: 4
+                        }}
+                    >
                         Save
                     </Button>
                 </Box>

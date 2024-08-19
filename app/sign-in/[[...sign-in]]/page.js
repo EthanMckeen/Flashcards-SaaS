@@ -34,6 +34,7 @@ export default function SignUpPage(){
             flexDirection="column"
             alignItems='center'
             justifyContent='center'
+            sx={{ my: 2}}
             >
                 <Typography variant="h4"> Sign in</Typography>
                 <SignIn/>

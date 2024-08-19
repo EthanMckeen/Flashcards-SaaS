@@ -113,13 +113,13 @@ const QuizPage = () => {
               variant="outlined"
               fullWidth
             />
-            <Button onClick={handleSubmit} variant="contained" sx={{ mt: 2, mx: 2, flex: 1, bgcolor: '#000293', '&:hover': { bgcolor: '#0278FF' } }}>
+            <Button onClick={handleSubmit} variant="contained" sx={{ mt: 2, mx: 2, flex: 1, bgcolor: '#dda15e', '&:hover': { bgcolor: '#bc6c25' } }}>
               Submit
             </Button>
             <Typography variant="body1" sx={{ mt: 2 }}>
               Score: {score} | Questions Asked: {questionCount}
             </Typography>
-            <Button onClick={handleLeaveClick} variant="contained" sx={{ mt: 2, mx: 2, bgcolor: '#98473e', '&:hover': { bgcolor: '#FF1900' } }}>
+            <Button onClick={handleLeaveClick} variant="contained" sx={{ mt: 2, mx: 2, bgcolor: '#606c38', '&:hover': { bgcolor: '#283618' } }}>
               Leave
             </Button>
           </Box>
